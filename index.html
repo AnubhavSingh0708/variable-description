@@ -32,6 +32,16 @@
             background-color: rgb(191, 217, 255);
             border-radius: 8px;
         }
+        button{
+            padding: 18px;
+            text-align: center;
+            background-color: rgb(255, 129, 91);
+            border-radius: 8px;
+            outline: none;
+            border: none;
+            margin: 18px;
+            font-size: 20px;
+        }
         tr:nth-child(even)>td:nth-child(2){
             background-color: rgba(117, 165, 255, 0.466); 
         }
@@ -78,6 +88,9 @@
         td:nth-child(2){
             background-color: rgb(138, 179, 255);
         }
+        button:active{
+            background-color: #ff9f8e;
+        }
     </style>
 </head>
 <body>
@@ -107,6 +120,8 @@
      </tr>
      </tbody>
    </table> 
+   <input type="file" id="inpt"  accept=".csv"  style="display: none;"/>
+   <button onclick="openf()">Open file</button><button onclick="savef()">Save as</button>
 </body>
 <script>
     function edit(){
@@ -138,5 +153,46 @@
         let td =document.getElementById("tb").children;
         document.getElementById("tb").children[td.length-2].remove();
     }
+
+    function openf(){
+        document.getElementById("inpt").click();
+        elem=document.getElementById("inpt");
+        elem.addEventListener("change", () => {
+      if (elem.files.length == 1) {
+
+      var file=elem.files[0];
+      var tex="";
+      const reader = new FileReader();
+      reader.readAsText(file);
+      reader.onload = (evt) => {
+      tex=evt.target.result
+  
+   
+     tex= tex.split('\n');
+
+     let td =document.getElementById("tb").children;
+     document.getElementById("tb").children[td.length-2].remove();
+        let last=td[td.length-1];
+        document.getElementById("opt").remove();
+        td =document.getElementById("tb").children;
+        
+    
+        for(let i=1;i<=tex.length;i++){
+            let str= tex[(i-1)].split(",");
+            var tr = document.createElement("tr");
+            tr.innerHTML="<td>"+i+"</td><td>"+str[0]+"</td><td>"+str[1]+"</td><td>"+str[2]+"</td>";
+            document.getElementById("tb").appendChild(tr);
+        }
+      
+        document.getElementById("tb").appendChild(last);
+        document.getElementById("tb").children=td;
+      
+  }};
+});
+    }
+    function savef(){
+
+    }
+
 </script>
 </html>
