@@ -180,8 +180,8 @@
      document.getElementById("tb").children[td.length-2].remove();
         let last=td[td.length-1];
         document.getElementById("opt").remove();
-        for(let a=1;a<td.length;a++){
-            td[a].remove();
+        while(td.length>1){
+            td[1].remove();
         }
         
         
