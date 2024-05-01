@@ -176,14 +176,14 @@
    
      tex= tex.split('\n');
 
-     let td =document.getElementById("tb").children;
+     var td =document.getElementById("tb").children;
      document.getElementById("tb").children[td.length-2].remove();
         let last=td[td.length-1];
         document.getElementById("opt").remove();
         for(let a=1;a<td.length;a++){
             td[a].remove();
         }
-        td =document.getElementById("tb").children;
+        
         
     
         for(let i=1;i<=tex.length;i++){
